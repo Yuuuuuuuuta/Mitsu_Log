@@ -38,4 +38,9 @@ public class UserService {
 
 	}
 
+	public User selectOne(String userId) {
+
+		return dao.selectOne(userId);
+	}
+
 }

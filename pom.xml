@@ -90,6 +90,19 @@
 			<artifactId>aspectjweaver </artifactId>
 		</dependency>
 
+		<!-- SpringSecurity -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+		<!-- Thymeleaf拡張（セキュリティ） -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+			<version>2.1.2.RELEASE</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -138,6 +138,12 @@ public class HomeController {
 		return getUserList(model);
 	}
 
+	//アドミン専用画面
+	@GetMapping("/admin")
+	public String getAdmin(Model model) {
+		model.addAttribute("contents", "login/admin :: admin_contents");
 
+		return "login/homeLayout";
+	}
 
 }

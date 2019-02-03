@@ -59,7 +59,7 @@ public class HomeController {
 	}
 
 	@GetMapping("/userDetail/{id:.+}")
-	public String getUserDetail(@ModelAttribute SignupForm form, Model model, @PathVariable("id") String userId) {
+	public String getuserDetail(@ModelAttribute SignupForm form, Model model, @PathVariable("id") String userId) {
 		System.out.println("userId=" + userId);
 
 		model.addAttribute("contents", "login/userDetail :: userDetail_contents");

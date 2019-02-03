@@ -97,6 +97,7 @@ public class HomeController {
 		user.setAge(form.getAge());
 		user.setMarriage(form.isMarriage());
 
+
 		boolean result = userService.updateOne(user);
 
 		if(result == true) {

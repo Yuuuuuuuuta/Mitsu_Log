@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.login.domain.model.User;
 import com.example.demo.login.domain.repository.UserDao;
 
-
-
 @Service
 public class UserService {
 

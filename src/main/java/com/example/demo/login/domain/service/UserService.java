@@ -14,6 +14,7 @@ public class UserService {
 	@Autowired
 	UserDao dao;
 
+	//追加用
 	public boolean insert(User user) {
 
 		int rowNumber = dao.insertOne(user);
@@ -28,6 +29,7 @@ public class UserService {
 
 	}
 
+	//カウント用
 	public int count() {
 		return dao.count();
 	}
@@ -38,14 +40,28 @@ public class UserService {
 
 	}
 
+	//1件取得
 	public User selectOne(String userId) {
 
 		return dao.selectOne(userId);
 	}
 
+	//1件更新用
 	public boolean updateOne(User user) {
 
 		int rowNumber = dao.updateOne(user);
+
+		boolean result = false;
+
+		if(rowNumber > 0) {
+			result = true;
+		}
+		return result;
+	}
+
+	//1件削除用
+	public boolean deleteOne(String userId) {
+		int rowNumber = dao.deleteOne(userId);
 
 		boolean result = false;
 
@@ -56,5 +72,7 @@ public class UserService {
 		return result;
 
 	}
+
+
 
 }

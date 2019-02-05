@@ -18,7 +18,7 @@ import lombok.Data;
 public class SignupForm {
 
 	@NotBlank(groups = ValidGroup1.class)
-	@Email(groups = ValidGroup2.class)
+	@Email
 	private String userId;
 
 	@NotBlank(groups = ValidGroup1.class)

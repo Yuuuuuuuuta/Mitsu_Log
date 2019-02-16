@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -125,6 +127,14 @@ public class HomeController {
 		return "login/homeLayout";
 	}
 
+	@GetMapping("/newArticle")
+	public String getNewArticle(@ModelAttribute ArticleForm form, Model model) {
+
+		model.addAttribute("contents", "login/newArticle :: newArticle_contents");
+
+		return "login/homeLayout";
+	}
+
 	@PostMapping(value="/userDetail", params = "update")
 	public String postUserDetailUpdate(@ModelAttribute SignupForm form, Model model) {
 		System.out.println("更新ボタンの処理");
@@ -164,6 +174,36 @@ public class HomeController {
 		}
 
 		return getUserList(model);
+	}
+
+
+	@PostMapping("/newArticle")
+	public String postNewArticle(@ModelAttribute @Validated ArticleForm form, BindingResult bindingResult, Model model) {
+
+		if(bindingResult.hasErrors()) {
+
+			return getNewArticle(form,model);
+		}
+
+		System.out.println(form);
+
+		Article article = new Article();
+
+		article.setArticleId(form.getArticleId());
+		article.setTitle(form.getTitle());
+		article.setMemo(form.getMemo());
+		article.setCategory(form.getCategory());
+		article.setPostDate(form.getPostDate());
+
+		boolean result = articleService.insert(article);
+
+		if(result == true) {
+			System.out.println("insert成功");
+		}else {
+			System.out.println("insert失敗");
+		}
+
+		return "redirect:/articleList";
 
 	}
 

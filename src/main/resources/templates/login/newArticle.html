@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8"></meta>
+</head>
+
+<body>
+	<div th:fragment="newArticle_contents">
+		 <div class="row">
+			<div class="col-sm-5">
+				<div class="page-header">
+					<h1>新規記事作成</h1>
+				</div>
+
+				<form method="post" th:action="@{/newArticle}" th:object="${articleForm}">
+					<table class="table table-bordered table-hover">
+
+						<tr>
+							<th class="active col-sm-2">記事ID</th>
+							<td class="col-sm-3">
+								<div class="form-group" th:classappend="${#fields.hasErrors('articleId')}?'has-error'">
+							    	<input type="text" class="form-control" th:field="*{articleId}" />
+							    	<span class="text-danger" th:if="${#fields.hasErrors('articleId')}" th:errors="*{articleId}">articleId error</span>
+						        </div>
+							</td>
+						</tr>
+
+						<tr>
+							<th class="active">タイトル</th>
+							<td class="col-sm-3">
+								<div class="form-group" th:classappend="${#fields.hasErrors('title')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{title}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('title')}"
+									th:errors="*{title}">title error</span>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th class="active">本文</th>
+							<td>
+								<div class="form-group" th:classappend="${#fields.hasErrors('memo')} ? 'has-error'">
+									<textarea class="form-control" rows="10" th:field="*{memo}"></textarea>
+									<span class="text-danger" th:if="${#fields.hasErrors('memo')}"
+									th:errors="*{memo}">memo error</span>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th class="active">カテゴリー</th>
+							<td>
+								<div class="form-group" th:classappend="${#fields.hasErrors('category')} ? 'has-error'">
+									<input type="text" class="form-control" th:field="*{category}" />
+									<span class="text-danger" th:if="${#fields.hasErrors('category')}"
+									th:errors="*{category}">category error</span>
+								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th class="active">投稿日時</th>
+							<td>
+								<div class="form-group" th:classappend="${#fields.hasErrors('postDate')} ? 'has-error'">
+									<input type="text" class="form-control" name="postDate" th:value="${#dates.format(#dates.createNow(), 'yyyy/MM/dd')}"/>
+									<span class="text-danger" th:if="${#fields.hasErrors('postDate')}"
+									th:errors="*{postDate}">postDate error</span>
+								</div>
+							</td>
+						</tr>
+
+					</table>
+
+					<button class="btn btn-primary btn-lg pull-right" type="submit" name="post">投稿</button>
+
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

@@ -39,7 +39,7 @@
 							<th class="active">本文</th>
 							<td>
 								<div class="form-group" th:classappend="${#fields.hasErrors('memo')} ? 'has-error'">
-									<input type="text" class="form-control" th:field="*{memo}" />
+									<textarea class="form-control" rows="10" th:field="*{memo}"></textarea>
 									<span class="text-danger" th:if="${#fields.hasErrors('memo')}"
 									th:errors="*{memo}">memo error</span>
 								</div>

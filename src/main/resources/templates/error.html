@@ -13,7 +13,7 @@
 	<h1 th:text="${status} + '' +${error}"></h1>
 	<p th:text="${message}"></p>
 	<p>Login画面に戻ってください</p>
-	<form method="post" th:acrion="@{/login}">
+	<form method="post" th:acrion="@{/logout}">
 		<button class="btn btn-link" type="submit">Login画面に戻る</button>
 	</form>
 </body>

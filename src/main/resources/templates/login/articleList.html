@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8"></meta>
+</head>
+
+<body>
+	<!-- コンテンツ -->
+	<div th:fragment="articleList_contents">
+		<div class="page-header">
+			<h1>記事一覧</h1>
+		</div>
+
+		<table class="table table-bordered table-hover table-striped">
+			<tr>
+				<th class="info col-sm-2">記事ID</th>
+				<th class="info col-sm-2">タイトル</th>
+				<th class="info col-sm-2">投稿日時</th>
+				<th class="info col-sm-2"></th>
+			</tr>
+			<tr th:each="article:${articleList}">
+				<td th:text="${article.articleId}"></td>
+				<td th:text="${article.title}"></td>
+				<td th:text="${article.postDate}"></td>
+				<td><a class="btn btn-primary" th:href="@{'/articleDetail/' + ${article.articleId}}">詳細</a></td>
+			</tr>
+		</table>
+
+		<!-- 記事一覧の件数 -->
+		<label th:text="'合計：' + ${articleListCount} + '件'"></label>
+		<br />
+
+		<!-- 更新・削除処理の結果表示用 -->
+		<label class="text-info" th:text="${result}">結果表示</label>
+
+	</div>
+
+</body>
+
+</html>

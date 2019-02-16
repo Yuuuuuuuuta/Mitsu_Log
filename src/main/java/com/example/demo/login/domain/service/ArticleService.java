@@ -5,19 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.login.domain.model.User;
-import com.example.demo.login.domain.repository.UserDao;
+import com.example.demo.login.domain.model.Article;
+import com.example.demo.login.domain.repository.ArticleDao;
 
 @Service
-public class UserService {
+public class ArticleService {
 
 	@Autowired
-	UserDao dao;
+	ArticleDao dao ;
 
 	//追加用
-	public boolean insert(User user) {
+	public boolean insert(Article article) {
 
-		int rowNumber = dao.insertOne(user);
+		int rowNumber = dao.insertOne(article);
 
 		boolean result = false;
 
@@ -34,22 +34,22 @@ public class UserService {
 		return dao.count();
 	}
 
-	public List<User> selectMany(){
+	public List<Article> selectMany(){
 
 		return dao.selectMany();
 
 	}
 
 	//1件取得
-	public User selectOne(String userId) {
+	public Article selectOne(String articleId) {
 
-		return dao.selectOne(userId);
+		return dao.selectOne(articleId);
 	}
 
 	//1件更新用
-	public boolean updateOne(User user) {
+	public boolean updateOne(Article article) {
 
-		int rowNumber = dao.updateOne(user);
+		int rowNumber = dao.updateOne(article);
 
 		boolean result = false;
 
@@ -60,8 +60,8 @@ public class UserService {
 	}
 
 	//1件削除用
-	public boolean deleteOne(String userId) {
-		int rowNumber = dao.deleteOne(userId);
+	public boolean deleteOne(String articleId) {
+		int rowNumber = dao.deleteOne(articleId);
 
 		boolean result = false;
 

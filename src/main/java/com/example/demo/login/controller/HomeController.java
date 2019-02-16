@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.demo.login.domain.model.Article;
+import com.example.demo.login.domain.model.ArticleForm;
 import com.example.demo.login.domain.model.SignupForm;
 import com.example.demo.login.domain.model.User;
+import com.example.demo.login.domain.service.ArticleService;
 import com.example.demo.login.domain.service.UserService;
 
 @Controller
@@ -33,6 +36,9 @@ public class HomeController {
 
 		return radio;
 	}
+
+	@Autowired
+	ArticleService articleService;
 
 
 	@GetMapping("/home")
@@ -80,6 +86,41 @@ public class HomeController {
 			form.setMarriage(user.isMarriage());
 
 			model.addAttribute("signupForm", form);
+		}
+		return "login/homeLayout";
+	}
+
+	@GetMapping("/articleList")
+	public String getArticleList(Model model) {
+		model.addAttribute("contents", "login/articleList :: articleList_contents");
+
+		List<Article> articleList = articleService.selectMany();
+
+		model.addAttribute("articleList", articleList);
+
+		int count = userService.count();
+		model.addAttribute("articleListCount", count);
+
+		return "login/homeLayout";
+	}
+
+	@GetMapping("/articleDetail/{id}")
+	public String getarticleDetail(@ModelAttribute ArticleForm form, Model model, @PathVariable("id") String articleId) {
+		System.out.println("articleId=" + articleId);
+
+		model.addAttribute("contents", "login/articleDetail :: articleDetail_contents");
+
+		if(articleId != null && articleId.length() > 0) {
+
+			Article article = articleService.selectOne(articleId);
+
+			form.setArticleId(article.getArticleId());
+			form.setTitle(article.getTitle());
+			form.setMemo(article.getMemo());
+			form.setCategory(article.getCategory());
+			form.setPostDate(article.getPostDate());
+
+			model.addAttribute("articleForm", form);
 		}
 		return "login/homeLayout";
 	}

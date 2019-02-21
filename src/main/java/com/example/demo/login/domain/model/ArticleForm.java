@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -18,6 +20,7 @@ public class ArticleForm {
 
 	private String category;
 
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date postDate;
 
 }

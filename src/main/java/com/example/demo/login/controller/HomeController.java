@@ -100,7 +100,7 @@ public class HomeController {
 
 		model.addAttribute("articleList", articleList);
 
-		int count = userService.count();
+		int count = articleService.count();
 		model.addAttribute("articleListCount", count);
 
 		return "login/homeLayout";
@@ -206,6 +206,50 @@ public class HomeController {
 		return "redirect:/articleList";
 
 	}
+
+	@PostMapping(value = "/articleDetail", params = "update")
+	public String postArticleDetailUpdate(@ModelAttribute ArticleForm form, Model model) {
+
+		System.out.println("更新ボタンの処理");
+
+		Article article = new Article();
+
+		article.setArticleId(form.getArticleId());
+		article.setTitle(form.getTitle());
+		article.setMemo(form.getMemo());
+		article.setCategory(form.getCategory());
+		article.setPostDate(form.getPostDate());
+
+		boolean result = articleService.updateOne(article);
+
+		if(result == true) {
+			model.addAttribute("result", "更新成功");
+		}else {
+			model.addAttribute("result", "更新失敗");
+		}
+
+		return getArticleList(model);
+
+	}
+
+
+	@PostMapping(value = "/articleDetail", params = "delete")
+	public String postArticleDetailDelete(@ModelAttribute ArticleForm form, Model model) {
+
+		System.out.println("削除ボタンの処理");
+
+		boolean result = articleService.deleteOne(form.getArticleId());
+
+		if(result == true) {
+			model.addAttribute("result", "削除成功");
+		}else {
+			model.addAttribute("result", "削除失敗");
+		}
+
+		return getArticleList(model);
+
+	}
+
 
 
 	@PostMapping("/logout")

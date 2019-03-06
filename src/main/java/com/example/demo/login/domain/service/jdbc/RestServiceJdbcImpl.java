@@ -45,7 +45,14 @@ public class RestServiceJdbcImpl implements RestService{
 
 	@Override
 	public boolean update(User user) {
-		return false;
+
+		int result = dao.updateOne(user);
+
+		if(result == 0) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	public boolean delete(String userId) {
